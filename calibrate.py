@@ -19,14 +19,14 @@ def calibrate_camera(chessboard_path = 'chessboard/*.jpg'):
 
     object_points = []
     image_points = []
-    h, w = 0, 0
+    height, width = 0, 0
 
     images = glob.glob(chessboard_path)
 
     for file_name in images:
         image = cv2.imread(file_name)
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        h, w = gray.shape[:2]
+        height, width = gray.shape[:2]
 
         # find chess board corners
         ret, corners = cv2.findChessboardCorners(gray, (9, 6), None)
@@ -37,4 +37,4 @@ def calibrate_camera(chessboard_path = 'chessboard/*.jpg'):
             cv2.cornerSubPix(gray, corners, (11, 11), (-1, -1), criteria)
             image_points.append(corners)
 
-    return cv2.calibrateCamera(object_points, image_points, (w, h), None, None)
+    return cv2.calibrateCamera(object_points, image_points, (width, height), None, None)
