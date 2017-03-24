@@ -11,7 +11,18 @@ MAX_LINE_GAP = 20
 
 
 def undistort(image, camera_matrix, dict_coeffs):
+    '''
+    Returns an undistorted image
+    (camera_matrix and dict_coeffs are provided by camera calibration)
+    '''
     return cv2.undistort(image, camera_matrix, dict_coeffs)
+
+
+def grayscale(image):
+    '''
+    Returns the image in gray scale
+    '''
+    return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 
 def edges(image, low_threshold = LOW_THRESHOLD, high_threshold = HIGH_THRESHOLD):
