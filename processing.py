@@ -30,3 +30,10 @@ def edges(image, low_threshold = LOW_THRESHOLD, high_threshold = HIGH_THRESHOLD)
     Performs a Canny transformation (contour detection) with the given image
     '''
     return cv2.Canny(image, low_threshold, high_threshold)
+
+
+def hough_lines(image, rho = RHO, theta = THETA,
+                threshold = HOUGH_THRESHOLD,
+                min_line_length = MIN_LINE_LENGTH, max_line_gap = MAX_LINE_GAP):
+    return cv2.HoughLinesP(image, rho, theta, threshold, np.array([]),
+                           minLineLength = min_line_length, maxLineGap = max_line_gap)
