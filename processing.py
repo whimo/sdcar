@@ -2,10 +2,12 @@ import cv2
 import numpy as np
 
 
-YELLOW_LOWER = np.array([90,  100, 100])
-YELLOW_UPPER = np.array([110, 255, 255])
 WHITE_LOWER =  np.array([200, 200, 200])
 WHITE_UPPER =  np.array([255, 255, 255])
+YELLOW_LOWER = np.array([90,  100, 100])
+YELLOW_UPPER = np.array([110, 255, 255])
+
+GAUSSIAN_KERNEL_SIZE = 2
 
 LOW_CANNY_THRESHOLD, HIGH_CANNY_THRESHOLD = 50, 150
 
@@ -32,6 +34,9 @@ def grayscale(image):
 
 
 def color_filter(image):
+    '''
+    Applies a color filter to recognize only white and yellow lines
+    '''
     hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
     white_filter =  cv2.inRange(image, WHITE_LOWER, WHITE_UPPER)
@@ -41,6 +46,14 @@ def color_filter(image):
     yellow_image = cv2.bitwise_and(image, image, mask = yellow_filter)
 
     return cv2.addWeighted(white_image, 1., yellow_image, 1., 0.)
+
+
+def blur(image):
+    '''
+    Applies a Gaussian blur to reduce noise
+    '''
+    return cv2.GaussianBlur(image, (GAUSSIAN_KERNEL_SIZE, GAUSSIAN_KERNEL_SIZE), 0)
+
 
 
 def edges(image, low_threshold = LOW_CANNY_THRESHOLD, high_threshold = HIGH_CANNY_THRESHOLD):
