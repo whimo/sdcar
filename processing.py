@@ -18,6 +18,19 @@ MIN_LINE_LENGTH = 10
 MAX_LINE_GAP = 20
 
 
+class SteeringNeuralNetwork(object):
+    '''
+    Neural network for lane following
+    '''
+
+    def __init__(self):
+        self.model = cv2.ANN_MLP()
+
+        layers = np.int32([38400, 32, 4])
+        self.model.create(layers)
+        self.model.load('model.xml')
+
+
 def undistort(image, camera_matrix, dict_coeffs):
     '''
     Returns an undistorted image
