@@ -63,8 +63,15 @@ def edges(image, low_threshold = LOW_CANNY_THRESHOLD, high_threshold = HIGH_CANN
     return cv2.Canny(image, low_threshold, high_threshold)
 
 
-def hough_lines(image, rho = RHO, theta = THETA,
-                threshold = HOUGH_THRESHOLD,
-                min_line_length = MIN_LINE_LENGTH, max_line_gap = MAX_LINE_GAP):
-    return cv2.HoughLinesP(image, rho, theta, threshold, np.array([]),
-                           minLineLength = min_line_length, maxLineGap = max_line_gap)
+def region_of_intrest(image, edges):
+    '''
+    Erases part of grayscale image outside the region if intrest
+    (specified by edges)
+    '''
+    mask = np.zeros_like(image)
+
+    color = 255
+
+    cv2.fillPoly(mask, edges, color)
+    filtered = cv2.bitwise_and(image, mask)
+    return filtered
