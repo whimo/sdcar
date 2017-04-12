@@ -28,6 +28,14 @@ def main():
                             (shape[1] - (shape[1] * (1 - ROI_BOTTOM)) // 2, shape[0])]],
                             dtype = np.int32)
 
+        image = processing.color_filter     (image)
+        image = processing.grayscale        (image)
+        image = processing.region_of_intrest(image, roi_edges)
+        image = processing.edges            (image)
+        image = proessing.blur              (image)
+
+        #here will go steering neural network prediction
+
         cv2.waitKey(1)
 
 
