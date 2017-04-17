@@ -11,10 +11,12 @@ ROI_TOP = 0.15
 ROI_BOTTOM = 0.8
 
 
+STREAM_URL = '192.168.0.100:8080/?action=stream'
+
 
 def main():
     retval, camera_matrix, dict_coeffs, rvecs, tvecs = calibrate_camera()
-    stream = Stream(url, camera_matrix, dict_coeffs)
+    stream = Stream(STREAM_URL, camera_matrix, dict_coeffs)
 
     while True:
         stream.update()
@@ -25,19 +27,17 @@ def main():
                             ((shape[1] * (1 - ROI_BOTTOM)) // 2, shape[0]),
                             ((shape[1] * (1 - ROI_TOP)) // 2, shape[0] - shape[0] * ROI_HEIGHT),
                             (shape[1] - (shape[1] * (1 - ROI_TOP)) // 2, shape[0] - shape[0] * ROI_HEIGHT),
-                            (shape[1] - (shape[1] * (1 - ROI_BOTTOM)) // 2, shape[0])]],
-                            dtype = np.int32)
+                            (shape[1] - (shape[1] * (1 - ROI_BOTTOM)) // 2, shape[0])]], dtype = np.int32)
 
         image = processing.color_filter     (image)
         image = processing.grayscale        (image)
         image = processing.region_of_intrest(image, roi_edges)
         image = processing.edges            (image)
-        image = proessing.blur              (image)
+        image = processing.blur             (image)
 
-        #here will go steering neural network prediction
+        # Here will go steering neural network prediction
 
         cv2.waitKey(1)
-
 
 
 if __name__ == '__main__':

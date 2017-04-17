@@ -68,7 +68,6 @@ def blur(image):
     return cv2.GaussianBlur(image, (GAUSSIAN_KERNEL_SIZE, GAUSSIAN_KERNEL_SIZE), 0)
 
 
-
 def edges(image, low_threshold = LOW_CANNY_THRESHOLD, high_threshold = HIGH_CANNY_THRESHOLD):
     '''
     Performs a Canny transformation (contour detection) with the given image
