@@ -9,7 +9,7 @@ class DriverClient(object):
     def __init__(self, host, port):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.connect((host, port))
-        self.serial_port = serial.Serial('/dev/tty.usbserial', 9600)
+        self.serial_port = serial.Serial('/dev/ttyACM0', 9600)
 
         self.message = '0'
 
