@@ -1,4 +1,5 @@
 import socket
+import time
 
 HOST = '0.0.0.0'
 PORT = 3509
@@ -35,6 +36,9 @@ class DriverServer(object):
         self.connection.sendto(str(direction), self.conn_address)
 
     def stop(self):
+        self.connection.sendto('quit', self.conn_address)
+
+    def close_conn(self):
         self.connection.close()
 
 
@@ -42,6 +46,8 @@ def main():
     driver = DriverServer(HOST, PORT)
     driver.accept_connection()
     driver.stop()
+    time.sleep(5)
+    driver.close_conn()
 
 
 if __name__ == '__main__':
