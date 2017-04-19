@@ -22,13 +22,13 @@ class DriverClient(object):
 
     def update(self):
         self.message = self.sock.recv(1024)
-        self.serial_port.write(int(self.message))
+        self.serial_port.write(self.message)
 
     def drive(self):
-        while 'quit' not in str(self.message):
+        while 'quit' not in self.message:
             self.update()
 
-        self.serial_port.write(0)
+        self.serial_port.write('0')
         print('Connection closed')
 
 

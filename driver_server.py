@@ -45,9 +45,17 @@ class DriverServer(object):
 def main():
     driver = DriverServer(HOST, PORT)
     driver.accept_connection()
-    driver.stop()
-    time.sleep(5)
-    driver.close_conn()
+
+    while True:
+        direction = int(input())
+
+        if direction == 8:
+            driver.stop()
+            time.sleep(2)
+            driver.close_conn()
+            break
+
+        driver.turn(direction)
 
 
 if __name__ == '__main__':

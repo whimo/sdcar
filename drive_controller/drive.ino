@@ -38,29 +38,24 @@ void turn (char direction)
   switch (direction)
   {
     case '0':
-      digitalWrite (E1, LOW);
-      digitalWrite (E2, LOW);
-      Serial.println("STOP");
+      analogWrite (E1, 0);
+      analogWrite (E2, 0);
       break;
     case '1':
-      digitalWrite (E1, HIGH);
-      digitalWrite (E2, HIGH);
-      Serial.println("FORWARD");
+      analogWrite (E1, 255);
+      analogWrite (E2, 255);
       break;
     case '2':
-      digitalWrite (E1, HIGH);
-      digitalWrite (E2, LOW);
-      Serial.println("RIGHT");
+      analogWrite (E1, 255);
+      analogWrite (E2, 0);
       break;
     case '3':
-      digitalWrite (E1, LOW);
-      digitalWrite (E2, HIGH);
-      Serial.println("LEFT");
+      analogWrite (E1, 0);
+      analogWrite (E2, 255);
       break;
     case '4':
-      digitalWrite (E1, HIGH);
-      digitalWrite (E2, HIGH);
-      Serial.println("BACKWARD");
+      analogWrite (E1, 255);
+      analogWrite (E2, 255);
       break;
     default:
       break;
