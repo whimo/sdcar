@@ -6,7 +6,7 @@ PORT = 3509
 
 
 class DriverServer(object):
-    def __init__(self, host, port):
+    def __init__(self, host = HOST, port = PORT):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.bind((host, port))
 
