@@ -4,12 +4,13 @@ import numpy as np
 
 WHITE_LOWER =  np.array([200, 200, 200])
 WHITE_UPPER =  np.array([255, 255, 255])
-YELLOW_LOWER = np.array([90,  100, 100])
+YELLOW_LOWER = np.array([90, 100, 100])
 YELLOW_UPPER = np.array([110, 255, 255])
 
 GAUSSIAN_KERNEL_SIZE = 2
 
-LOW_CANNY_THRESHOLD, HIGH_CANNY_THRESHOLD = 50, 150
+LOW_CANNY_THRESHOLD = 50
+HIGH_CANNY_THRESHOLD = 150
 
 RHO = 2
 THETA = 1 * (np.pi / 180)
@@ -87,3 +88,13 @@ def region_of_intrest(image, edges):
     cv2.fillPoly(mask, edges, color)
     filtered = cv2.bitwise_and(image, mask)
     return filtered
+
+
+def process(image, roi_edges):
+    image = color_filter     (image)
+    image = grayscale        (image)
+    image = region_of_intrest(image, roi_edges)
+    image = edges            (image)
+    image = blur             (image)
+
+    return image
